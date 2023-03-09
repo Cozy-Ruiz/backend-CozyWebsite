@@ -35,10 +35,25 @@ router.post('/change-password',
     try {
       const { token, newPassword } = req.body;
       const rta = await service.changePassword(token, newPassword);
+      console.log(rta);
+      //res.json(rta);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.post('/contact', 
+  async (req, res, next) => {
+    
+    try {
+      const { name, email, message } = req.body;
+      const rta = await service.sendMailContact(name, email, message);
       res.json(rta);
     } catch (error) {
       next(error);
     }
+    
   }
 );
 
